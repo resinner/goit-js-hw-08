@@ -10,7 +10,7 @@ let formData = {};
 const onSetItem = throttle((e) => {
     formData[e.target.name] = e.target.value;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(formData));
-    console.log(formData);
+    // console.log(formData);
 }, 500);
 
 form.addEventListener('input', onSetItem);
@@ -22,7 +22,8 @@ savedFormData();
 function onFormSubmit(e) {
     e.preventDefault();
     e.currentTarget.reset();
-localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(STORAGE_KEY);
+        console.log(formData);
 }
 
 function savedFormData() {
@@ -30,8 +31,7 @@ function savedFormData() {
     const parsedFormData = JSON.parse(savedFormData);
     if (parsedFormData) {
         formData = parsedFormData;
-        email.value = formData.email;
-        textarea.value = formData.message;
-        console.log(formData);
+        email.value = formData.email || "";
+        textarea.value = formData.message || "";
     }
 }
